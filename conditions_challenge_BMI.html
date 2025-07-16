@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: #b3b3b3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.header {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 8px;
+}
+
+.login-container {
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+}
+
+h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.input-group label {
+    font-weight: bold;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+.gender-options {
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.gender-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#submit:hover {
+    background-color: #0056b3;
+}
+
+.register-link {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+
+
+.nav-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background-color: #218838;
+}
+
+#classification-bad{
+    color: #c40000;
+}
+
+#classification-middle{
+    color: #c5b800;
+}
+
+#classification-good{
+    color: #00ff00;
+}
+
+#bmi2{
+    color: #c40000;
+}
+
+span{
+    color: #007bff;
+    font-size: 135%;
+}
+
+</style>
+<body>
+    <div class="login-container">
+        <h2><span>BMI</span> حساب</h2>
+      
+            <div class="input-group">
+                <label>الطول (بالمتر)</label>
+                <input id="length" type="text">
+            </div>
+            <div class="input-group">
+                <label>الوزن (بالكيلو جرام)</label>
+                <input id="weight" type="text">
+            </div>
+        
+            <div class="input-group">
+                <input type="submit" value="حساب" id="submit">
+            </div>
+
+            <h4 id="bmi"></h4>
+            <h4 id="bmi2"></h4>
+            <h4 id="classification-good"></h4>
+            <h4 id="classification-middle"></h4>
+            <h4 id="classification-bad"></h4>
+    
+
+    </div>
+</body>
+<script>
+    
+    document.getElementById("submit").addEventListener("click", function(){
+
+        document.getElementById("classification-good").innerHTML = ""
+        document.getElementById("classification-middle").innerHTML = ""
+        document.getElementById("classification-bad").innerHTML = ""
+        document.getElementById("bmi").innerHTML = ""
+        document.getElementById("bmi2").innerHTML = ""
+    })
+
+    document.getElementById("submit").addEventListener("click", function(){
+
+  var leength = document.getElementById("length").value
+  var weight = document.getElementById("weight").value
+  var bmi = weight / ( leength*leength) 
+
+  if (isNaN(bmi)){
+    document.getElementById("bmi2").innerHTML = "!ادخل الطول والوزن اولا"
+  }else{
+    document.getElementById("bmi").innerHTML = "bmi =  " + bmi
+  }
+
+
+   if (bmi > 40){
+    document.getElementById("classification-bad").innerHTML = "التصنيف" + "  " +   "سمنه خطيرة"
+
+   }else if(bmi >= 35) {
+    document.getElementById("classification-bad").innerHTML =  "التصنيف" + "  " +  "سمنه درجة ثانية"
+
+   }else if(bmi >= 30){
+    document.getElementById("classification-bad").innerHTML = "التصنيف" + "  " +   "سمنه درجة اولى"
+
+   }else if(bmi >=25){
+    document.getElementById("classification-middle").innerHTML = "التصنيف" + "  " +   "وزن زائد"
+
+   }else if(bmi >=18){
+    document.getElementById("classification-good").innerHTML = "التصنيف" + "  " +   "وزن مثالي"
+
+   }else if(bmi < 18){
+    document.getElementById("classification-middle").innerHTML = "التصنيف" + "  " + "نحافة"
+   }
+    })
+    
+
+</script>
+</html>
